@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="myJobs">
+            <file>./tests/Feature/Users/CreateTest.php</file>
+            <file>./tests/Feature/Users/Auth/LoginTest.php</file>
+            <file>./tests/Feature/Users/CreateTest.php</file>
+            <file>./tests/Feature/Vacancies/CreateTest.php</file>
+            <file>./tests/Feature/Vacancies/SearchTest.php</file>
+            <file>./tests/Feature/Vacancies/ShowTest.php</file>
+            <file>./tests/Feature/Vacancies/EditTest.php</file>
+            <file>./tests/Feature/VacanciesUsers/MyApplicationsTest.php</file>
+            <file>./tests/Feature/VacanciesUsers/MyPublishedVacanciesTest.php</file>
+            <file>./tests/Feature/VacanciesUsers/ToApplyOrUnapplyTest.php</file>   
+            <file>./tests/Feature/VacanciesUsers/VacancyApplicationsTest.php</file>         
+            <file>./tests/Feature/Vacancies/DeleteTest.php</file>
+            <file>./tests/Feature/Infos/CreateTest.php</file>
+            <file>./tests/Feature/Infos/EditTest.php</file>
+            <file>./tests/Unit/Users/Auth/RefreshTest.php</file>
+            <file>./tests/Unit/AddressVacancy/RegisterAddressVacancyTest.php</file>         
+            <file>./tests/Unit/Users/Auth/MeTest.php</file>
+            <file>./tests/Unit/Users/Auth/LogoutTest.php</file>
+        </testsuite>
+    </testsuites>
+
+    <coverage>
+        <include>
+            <directory suffix=".php">./app</directory>
+        </include>
+    </coverage>
+    
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_DRIVER" value="file"/>
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_DATABASE" value="meusbicos_bd"/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+    </php>
+</phpunit>

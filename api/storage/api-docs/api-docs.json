@@ -1,0 +1,2078 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My Jobs",
+        "description": "Laravel API documentation for the 'My Jobs' application.",
+        "contact": {
+            "email": "erick1souza1ago04@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/api/profiles": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Retrieve a list of profiles",
+                "description": "Returns a list of all profiles.",
+                "operationId": "profiles_index",
+                "responses": {
+                    "200": {
+                        "description": "A list of profiles",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Profile ID",
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "description": "Profile name",
+                                                        "type": "string",
+                                                        "example": "Moder"
+                                                    },
+                                                    "guard_name": {
+                                                        "description": "Guard name",
+                                                        "type": "string",
+                                                        "example": "api"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp",
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-07-02T23:12:14.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Update timestamp",
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-07-02T23:12:14.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Create a new profile",
+                "description": "Creates a new profile with specified name and permissions.",
+                "operationId": "profiles_store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "permissions"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name of the new profile",
+                                        "type": "string",
+                                        "example": "Editor"
+                                    },
+                                    "permissions": {
+                                        "type": "array",
+                                        "items": {
+                                            "description": "Permission name",
+                                            "type": "string",
+                                            "enum": [
+                                                "api.vacancies.index",
+                                                "api.vacancies.store",
+                                                "api.vacancies.show",
+                                                "api.vacancies.update",
+                                                "api.vacancies.destroy",
+                                                "api.infos.index",
+                                                "api.infos.store",
+                                                "api.infos.show",
+                                                "api.infos.update",
+                                                "api.infos.destroy",
+                                                "api.auth.login",
+                                                "api.auth.create",
+                                                "api.auth.logout",
+                                                "api.auth.refresh",
+                                                "api.auth.me",
+                                                "api.auth.infos",
+                                                "api.vacancies_user.my_published_vacancies",
+                                                "api.vacancies_user.my_applications_vacancies",
+                                                "api.vacancies_user.to_apply_or_unapply",
+                                                "api.vacancies_user.vacancy_applications"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The created profile",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Profile ID",
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "description": "Profile name",
+                                                        "type": "string",
+                                                        "example": "Moder"
+                                                    },
+                                                    "guard_name": {
+                                                        "description": "Guard name",
+                                                        "type": "string",
+                                                        "example": "api"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp",
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-07-02T23:12:14.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Update timestamp",
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-07-02T23:12:14.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/profiles/{profile}": {
+            "put": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Update a profile",
+                "description": "Updates an existing profile by ID with new name and permissions.",
+                "operationId": "profiles_update",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "ID of the profile to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "permissions"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "New name of the profile",
+                                        "type": "string",
+                                        "example": "Editor"
+                                    },
+                                    "permissions": {
+                                        "type": "array",
+                                        "items": {
+                                            "description": "New permission name",
+                                            "type": "string",
+                                            "enum": [
+                                                "api.vacancies.index",
+                                                "api.vacancies.store",
+                                                "api.vacancies.show",
+                                                "api.vacancies.update",
+                                                "api.vacancies.destroy",
+                                                "api.infos.index",
+                                                "api.infos.store",
+                                                "api.infos.show",
+                                                "api.infos.update",
+                                                "api.infos.destroy",
+                                                "api.auth.login",
+                                                "api.auth.create",
+                                                "api.auth.logout",
+                                                "api.auth.refresh",
+                                                "api.auth.me",
+                                                "api.auth.infos",
+                                                "api.vacancies_user.my_published_vacancies",
+                                                "api.vacancies_user.my_applications_vacancies",
+                                                "api.vacancies_user.to_apply_or_unapply",
+                                                "api.vacancies_user.vacancy_applications"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The updated profile",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Profile ID",
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "description": "Profile name",
+                                                        "type": "string",
+                                                        "example": "Moder"
+                                                    },
+                                                    "guard_name": {
+                                                        "description": "Guard name",
+                                                        "type": "string",
+                                                        "example": "api"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp",
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-07-02T23:12:14.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Update timestamp",
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-07-02T23:12:14.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Delete a profile",
+                "description": "Deletes an existing profile by ID.",
+                "operationId": "profiles_destroy",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "ID of the profile to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Profile successfully deleted"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/profiles/assign_role_for_user/{user_id}": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Assign one role for user",
+                "description": "Assign one role for user.",
+                "operationId": "assign_role_for_user",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "role_id",
+                        "in": "query",
+                        "description": "Role to assign.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Profile assign for user successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authenticate user.",
+                "description": "Authenticate user.",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "login Credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "giovana@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "giovana3#_!.G"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "token"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid Credentials.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Creates a new user.",
+                "description": "Creates a new user.",
+                "operationId": "user_store",
+                "requestBody": {
+                    "description": "Informações do usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Giovana"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "giovana@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "giovana3#_!.G"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User registered successfully!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "type": "object",
+                                            "example": []
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": []
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User registered successfully.!"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was a problem registering the user.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "There was a problem registering the user."
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error details"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 500
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/me": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Information about the authenticated user.",
+                "description": "Information about the authenticated user.",
+                "operationId": "me",
+                "responses": {
+                    "200": {
+                        "description": "User information successfully retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "444"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Giovana"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "giovana@gmail.com"
+                                        },
+                                        "email_verified_at": {
+                                            "type": "string",
+                                            "example": "null"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2024-05-01T18:31:41.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2024-05-01T18:31:41.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logs out the user and invalidates the JWT token.",
+                "description": "Logs out the user and invalidates the JWT token.",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "User logged out successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logout completed successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Restore user token.",
+                "description": "Restore user token.",
+                "operationId": "refresh",
+                "responses": {
+                    "200": {
+                        "description": "User information successfully retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "token"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/infos/{user_id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user's infos",
+                "description": "Retrieve all infos belonging to the specified user.",
+                "operationId": "getInfos",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID of the user whose infos are to be retrieved. If not provided, retrieves infos for the authenticated user.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of infos retrieved successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "ID of the info.",
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "info": {
+                                                        "description": "Formatted information content.",
+                                                        "type": "string",
+                                                        "example": "Formatted info content"
+                                                    },
+                                                    "type": {
+                                                        "description": "Type of the info.",
+                                                        "type": "string",
+                                                        "example": "phone"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No infos found for the specified user.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No infos found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/infos": {
+            "post": {
+                "tags": [
+                    "Infos"
+                ],
+                "summary": "Create a new info",
+                "description": "Create a new info with the provided data.",
+                "operationId": "infos_store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "code": {
+                                        "description": "Code of the info.",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "info": {
+                                        "description": "Information content.",
+                                        "type": "string",
+                                        "example": "14920388."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Info created successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID of the created info.",
+                                                    "type": "integer",
+                                                    "example": "8"
+                                                },
+                                                "code": {
+                                                    "description": "code of the created info.",
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "info": {
+                                                    "description": "info of the created info.",
+                                                    "type": "string",
+                                                    "example": "14920388"
+                                                },
+                                                "user_id": {
+                                                    "description": "user_id of the created info.",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "updated_at": {
+                                                    "description": "updated_at of the created info.",
+                                                    "type": "string",
+                                                    "example": "2024-06-24T22:24:25.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "description": "created_at of the created info.",
+                                                    "type": "string",
+                                                    "example": "2024-06-24T22:24:25.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was a problem registering the info.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "There was a problem registering the info."
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Internal server error."
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 500
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/infos/{id}": {
+            "put": {
+                "tags": [
+                    "Infos"
+                ],
+                "summary": "Update info",
+                "description": "Update info with the provided data.",
+                "operationId": "infos_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the info to update",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "code": {
+                                        "description": "Code of the info.",
+                                        "type": "string",
+                                        "example": "3"
+                                    },
+                                    "info": {
+                                        "description": "Information content.",
+                                        "type": "string",
+                                        "example": "Updated information content."
+                                    },
+                                    "user_id": {
+                                        "description": "ID of the user updating the info.",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Info updated successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID of the updated info.",
+                                                    "type": "integer",
+                                                    "example": "8"
+                                                },
+                                                "code": {
+                                                    "description": "Code of the updated info.",
+                                                    "type": "string",
+                                                    "example": "3"
+                                                },
+                                                "info": {
+                                                    "description": "Information content of the updated info.",
+                                                    "type": "string",
+                                                    "example": "Updated information content."
+                                                },
+                                                "user_id": {
+                                                    "description": "ID of the user who updated the info.",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "updated_at": {
+                                                    "description": "Date and time of the last update.",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-06-24T22:30:45.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "description": "Date and time of creation.",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-06-24T22:24:25.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid info: unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid info: unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was a problem updating the info.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "There was a problem updating the info."
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Internal server error."
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 500
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/vacancies_user/my_published_vacancies": {
+            "get": {
+                "tags": [
+                    "VacanciesUsers"
+                ],
+                "summary": "Retrieve a list of vacancies published by the authenticated user",
+                "description": "Returns a list of vacancies published by the authenticated user.",
+                "operationId": "myPublishedVacancies",
+                "responses": {
+                    "200": {
+                        "description": "A list of vacancies published by the authenticated user.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "ID Vacancy.",
+                                                        "type": "integer",
+                                                        "example": "2"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp of vacancy.",
+                                                        "type": "string",
+                                                        "example": "2024-05-26T22:40:21.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Update timestamp of vacancy.",
+                                                        "type": "string",
+                                                        "example": "2024-05-26T22:40:21.000000Z"
+                                                    },
+                                                    "short_description": {
+                                                        "description": "Short description of vacancy.",
+                                                        "type": "string",
+                                                        "example": "test update"
+                                                    },
+                                                    "long_description": {
+                                                        "description": "Long description of vacancy.",
+                                                        "type": "string",
+                                                        "example": "Fazendo teste de tal tal tal."
+                                                    },
+                                                    "wage": {
+                                                        "description": "Wage of vacancy.",
+                                                        "type": "string",
+                                                        "example": "R$ 7,77"
+                                                    },
+                                                    "zip_code": {
+                                                        "description": "Zip code (CEP) of vacancy.",
+                                                        "type": "string",
+                                                        "example": "12345678"
+                                                    },
+                                                    "user": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "description": "ID of the user.",
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "description": "Name of the user.",
+                                                                "type": "string",
+                                                                "example": "Erick"
+                                                            },
+                                                            "email": {
+                                                                "description": "Email of the user.",
+                                                                "type": "string",
+                                                                "example": "erick@jobs.com"
+                                                            },
+                                                            "email_verified_at": {
+                                                                "description": "Email verified at of the user.",
+                                                                "type": "string",
+                                                                "example": "erick_verify@jobs.com"
+                                                            },
+                                                            "created_at": {
+                                                                "description": "created at of the user.",
+                                                                "type": "string",
+                                                                "example": "2024-06-04T01:42:02.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "description": "updated at of the user.",
+                                                                "type": "string",
+                                                                "example": "2024-06-04T01:42:02.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/vacancies_user/my_applications_vacancies": {
+            "get": {
+                "tags": [
+                    "VacanciesUsers"
+                ],
+                "summary": "Retrieve a list of vacancies published by the authenticated user",
+                "description": "Returns a list of vacancies published by the authenticated user.",
+                "operationId": "myApplications",
+                "responses": {
+                    "200": {
+                        "description": "A list of vacancies published by the authenticated user.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "ID Vacancy.",
+                                                        "type": "integer",
+                                                        "example": "2"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp of vacancy.",
+                                                        "type": "string",
+                                                        "example": "2024-05-26T22:40:21.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Update timestamp of vacancy.",
+                                                        "type": "string",
+                                                        "example": "2024-05-26T22:40:21.000000Z"
+                                                    },
+                                                    "short_description": {
+                                                        "description": "Short description of vacancy.",
+                                                        "type": "string",
+                                                        "example": "test update"
+                                                    },
+                                                    "long_description": {
+                                                        "description": "Long description of vacancy.",
+                                                        "type": "string",
+                                                        "example": "Fazendo teste de tal tal tal."
+                                                    },
+                                                    "wage": {
+                                                        "description": "Wage of vacancy.",
+                                                        "type": "string",
+                                                        "example": "R$ 7,77"
+                                                    },
+                                                    "zip_code": {
+                                                        "description": "Zip code (CEP) of vacancy.",
+                                                        "type": "string",
+                                                        "example": "12345678"
+                                                    },
+                                                    "user": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "description": "ID of the user.",
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "description": "Name of the user.",
+                                                                "type": "string",
+                                                                "example": "Erick"
+                                                            },
+                                                            "email": {
+                                                                "description": "Email of the user.",
+                                                                "type": "string",
+                                                                "example": "erick@jobs.com"
+                                                            },
+                                                            "email_verified_at": {
+                                                                "description": "Email verified at of the user.",
+                                                                "type": "string",
+                                                                "example": "erick_verify@jobs.com"
+                                                            },
+                                                            "created_at": {
+                                                                "description": "created at of the user.",
+                                                                "type": "string",
+                                                                "example": "2024-06-04T01:42:02.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "description": "updated at of the user.",
+                                                                "type": "string",
+                                                                "example": "2024-06-04T01:42:02.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/vacancies_user/to_apply_or_unapply/{vacancy_id}": {
+            "get": {
+                "tags": [
+                    "VacanciesUsers"
+                ],
+                "summary": "Apply or unapply to a vacancy",
+                "description": "Apply or unapply to a specific vacancy.",
+                "operationId": "toApplyOrUnapply",
+                "parameters": [
+                    {
+                        "name": "vacancy_id",
+                        "in": "path",
+                        "description": "ID of the vacancy.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Action to perform (attach or detach).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "attach",
+                                "detach"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message confirming the action.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User John applied to Vacancy XYZ"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Invalid data or action provided.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid data or action provided."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/vacancies_user/vacancy_applications/{vacancy_id}": {
+            "get": {
+                "tags": [
+                    "VacanciesUsers"
+                ],
+                "summary": "Retrieve a list of users who applied to a specific vacancy",
+                "description": "Returns a list of users who applied to a specific vacancy.",
+                "operationId": "vacancyApplications",
+                "parameters": [
+                    {
+                        "name": "vacancy_id",
+                        "in": "path",
+                        "description": "ID of the vacancy",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of users who applied to the specified vacancy.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "ID of the user.",
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "description": "Name of the user.",
+                                                        "type": "string",
+                                                        "example": "John Doe"
+                                                    },
+                                                    "email": {
+                                                        "description": "Email of the user.",
+                                                        "type": "string",
+                                                        "example": "john@exasmple.com"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp of the user application.",
+                                                        "type": "string",
+                                                        "example": "2024-06-09T12:00:00.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Update timestamp of the user application.",
+                                                        "type": "string",
+                                                        "example": "2024-06-09T12:00:00.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Vacancy not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/vacancies": {
+            "get": {
+                "tags": [
+                    "Vacancies"
+                ],
+                "summary": "Retrieve a list of vacancies",
+                "description": "Returns a paginated list of vacancies optionally filtered by parameters.",
+                "operationId": "vacancies_index",
+                "parameters": [
+                    {
+                        "name": "zip_code",
+                        "in": "query",
+                        "description": "Filter vacancies by zip code.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "wage",
+                        "in": "query",
+                        "description": "Filter vacancies by wage.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "short_description",
+                        "in": "query",
+                        "description": "Filter vacancies by short description.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "long_description",
+                        "in": "query",
+                        "description": "Filter vacancies by long description.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "qtd_page",
+                        "in": "query",
+                        "description": "Number of vacancies per page.",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A paginated list of vacancies.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "ID Vacancy.",
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "short_description": {
+                                                        "description": "Short description of vacancy",
+                                                        "type": "string",
+                                                        "example": "Test..."
+                                                    },
+                                                    "long_description": {
+                                                        "description": "Long description of vacancy",
+                                                        "type": "string",
+                                                        "example": "Test... (long)"
+                                                    },
+                                                    "wage": {
+                                                        "description": "Wage of vacancy",
+                                                        "type": "string",
+                                                        "example": "R$ 12409,14"
+                                                    },
+                                                    "zip_code": {
+                                                        "description": "Zip code (CEP) of vacancy",
+                                                        "type": "string",
+                                                        "example": "14148-300"
+                                                    },
+                                                    "user": {
+                                                        "description": "User registered of vacancy",
+                                                        "type": "string",
+                                                        "example": "Erick Rampo"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "pages": {
+                                            "properties": {
+                                                "previous": {
+                                                    "description": "Link to the previous page.",
+                                                    "type": "string"
+                                                },
+                                                "next": {
+                                                    "description": "Link to the next page.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Vacancies"
+                ],
+                "summary": "Create a new vacancy",
+                "description": "Create a new vacancy with the provided data.",
+                "operationId": "vacancies_store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "short_description": {
+                                        "description": "Short description of the vacancy (between 5 and 60 characters).",
+                                        "type": "string",
+                                        "example": "Test short description"
+                                    },
+                                    "long_description": {
+                                        "description": "Long description of the vacancy (between 10 and 250 characters).",
+                                        "type": "string",
+                                        "example": "Test long description"
+                                    },
+                                    "wage": {
+                                        "description": "Wage of the vacancy (in cents).",
+                                        "type": "integer",
+                                        "example": "1240914"
+                                    },
+                                    "zip_code": {
+                                        "description": "Zip code (CEP) of the vacancy.",
+                                        "type": "string",
+                                        "example": "14148-300"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Vacancy created successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID of the created vacancy.",
+                                                    "type": "integer",
+                                                    "example": "8"
+                                                },
+                                                "short_description": {
+                                                    "description": "Short description of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "Teste"
+                                                },
+                                                "long_description": {
+                                                    "description": "Long description of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "Teste de uma descrição longa"
+                                                },
+                                                "wage": {
+                                                    "description": "Wage of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "1240914"
+                                                },
+                                                "zip_code": {
+                                                    "description": "Zip code (CEP) of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "14315250"
+                                                },
+                                                "user_id": {
+                                                    "description": "ID of the user creating the vacancy.",
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "updated_at": {
+                                                    "description": "Date and time of the last update.",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-05-17T00:04:49.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "description": "Date and time of creation.",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-05-17T00:04:49.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/vacancies/{id}": {
+            "get": {
+                "tags": [
+                    "Vacancies"
+                ],
+                "summary": "Retrieve a single vacancy",
+                "description": "Retrieve details of a single vacancy by its ID.",
+                "operationId": "vacancies_show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the vacancy to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Vacancy details retrieved successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID of the vacancy.",
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "short_description": {
+                                                    "description": "Short description of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "Test"
+                                                },
+                                                "long_description": {
+                                                    "description": "Long description of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "Test long description"
+                                                },
+                                                "wage": {
+                                                    "description": "Wage of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "R$ 12409,14"
+                                                },
+                                                "zip_code": {
+                                                    "description": "Zip code (CEP) of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "14148-300"
+                                                },
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "description": "ID of the user.",
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "name": {
+                                                            "description": "Name of the user.",
+                                                            "type": "string",
+                                                            "example": "Erick"
+                                                        },
+                                                        "email": {
+                                                            "description": "Email of the user.",
+                                                            "type": "string",
+                                                            "example": "erick@jobs.com"
+                                                        },
+                                                        "email_verified_at": {
+                                                            "description": "Email verified at of the user.",
+                                                            "type": "string",
+                                                            "example": "erick_verify@jobs.com"
+                                                        },
+                                                        "created_at": {
+                                                            "description": "created at of the user.",
+                                                            "type": "string",
+                                                            "example": "2024-06-04T01:42:02.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "description": "updated at of the user.",
+                                                            "type": "string",
+                                                            "example": "2024-06-04T01:42:02.000000Z"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "zip": {
+                                                    "properties": {
+                                                        "zip_code": {
+                                                            "description": "code of the zip.",
+                                                            "type": "string",
+                                                            "example": "14085-440"
+                                                        },
+                                                        "street": {
+                                                            "description": "street of the zip.",
+                                                            "type": "string",
+                                                            "example": "Captain Solomon Avenue"
+                                                        },
+                                                        "complement": {
+                                                            "description": "Complement of the zip.",
+                                                            "type": "string",
+                                                            "example": "Close to the market x"
+                                                        },
+                                                        "neighborhood": {
+                                                            "description": "neighborhood of the zip.",
+                                                            "type": "string",
+                                                            "example": "Elysian Fields"
+                                                        },
+                                                        "locality": {
+                                                            "description": "city of the zip.",
+                                                            "type": "string",
+                                                            "example": "Central City"
+                                                        },
+                                                        "uf": {
+                                                            "description": "uf the zip.",
+                                                            "type": "string",
+                                                            "example": "SP"
+                                                        },
+                                                        "ibge": {
+                                                            "description": "ibge code of the zip.",
+                                                            "type": "integer",
+                                                            "example": "3543402"
+                                                        },
+                                                        "gia": {
+                                                            "description": "gia code of the zip.",
+                                                            "type": "integer",
+                                                            "example": "5824"
+                                                        },
+                                                        "ddd": {
+                                                            "description": "ddd code of the zip.",
+                                                            "type": "integer",
+                                                            "example": "16"
+                                                        },
+                                                        "siafi": {
+                                                            "description": "siafi code of the zip.",
+                                                            "type": "integer",
+                                                            "example": "6969"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Vacancy not found."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Vacancies"
+                ],
+                "summary": "Update an existing vacancy",
+                "description": "Update an existing vacancy with the provided data.",
+                "operationId": "vacancies_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the vacancy to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "short_description": {
+                                        "description": "Short description of the vacancy (between 5 and 60 characters).",
+                                        "type": "string",
+                                        "example": "Updated short description"
+                                    },
+                                    "long_description": {
+                                        "description": "Long description of the vacancy (between 10 and 250 characters).",
+                                        "type": "string",
+                                        "example": "Updated long description"
+                                    },
+                                    "wage": {
+                                        "description": "Wage of the vacancy (in cents).",
+                                        "type": "integer",
+                                        "example": 1500000
+                                    },
+                                    "zip_code": {
+                                        "description": "Zip code (CEP) of the vacancy.",
+                                        "type": "string",
+                                        "example": "11020-123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Vacancy updated successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID of the updated vacancy.",
+                                                    "type": "integer",
+                                                    "example": "8"
+                                                },
+                                                "short_description": {
+                                                    "description": "Short description of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "Updated short description"
+                                                },
+                                                "long_description": {
+                                                    "description": "Long description of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "Updated long description"
+                                                },
+                                                "wage": {
+                                                    "description": "Wage of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "1500000"
+                                                },
+                                                "zip_code": {
+                                                    "description": "Zip code (CEP) of the vacancy.",
+                                                    "type": "string",
+                                                    "example": "11020-123"
+                                                },
+                                                "user_id": {
+                                                    "description": "ID of the user updating the vacancy.",
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "updated_at": {
+                                                    "description": "Date and time of the last update.",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-05-17T12:00:00.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "description": "Date and time of creation.",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-05-17T00:00:00.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized - The user is not authorized to update this vacancy."
+                    },
+                    "404": {
+                        "description": "Vacancy not found."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Vacancies"
+                ],
+                "summary": "Delete a vacancy",
+                "description": "Delete a vacancy by its ID.",
+                "operationId": "vacancies_destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the vacancy to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Vacancy deleted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Confirmation message.",
+                                            "type": "string",
+                                            "example": "Vacancy successfully deleted."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized - The user is not authorized to delete this vacancy."
+                    },
+                    "404": {
+                        "description": "Vacancy not found."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Profiles",
+            "description": "Profiles"
+        },
+        {
+            "name": "Profiles",
+            "description": "Profiles"
+        },
+        {
+            "name": "Profiles",
+            "description": "Profiles"
+        },
+        {
+            "name": "Profiles",
+            "description": "Profiles"
+        },
+        {
+            "name": "Profiles",
+            "description": "Profiles"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        },
+        {
+            "name": "Infos",
+            "description": "Infos"
+        },
+        {
+            "name": "Infos",
+            "description": "Infos"
+        },
+        {
+            "name": "VacanciesUsers",
+            "description": "VacanciesUsers"
+        },
+        {
+            "name": "VacanciesUsers",
+            "description": "VacanciesUsers"
+        },
+        {
+            "name": "VacanciesUsers",
+            "description": "VacanciesUsers"
+        },
+        {
+            "name": "VacanciesUsers",
+            "description": "VacanciesUsers"
+        },
+        {
+            "name": "Vacancies",
+            "description": "Vacancies"
+        },
+        {
+            "name": "Vacancies",
+            "description": "Vacancies"
+        },
+        {
+            "name": "Vacancies",
+            "description": "Vacancies"
+        },
+        {
+            "name": "Vacancies",
+            "description": "Vacancies"
+        },
+        {
+            "name": "Vacancies",
+            "description": "Vacancies"
+        }
+    ]
+}
