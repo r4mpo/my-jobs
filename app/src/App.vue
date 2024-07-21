@@ -5,22 +5,21 @@
 <script>
 export default {
   name: 'App',
-  created() {
+  mounted() {
     this.verifySession();
   },
   methods: {
     verifySession() {
-      let routeName = this.$route.name;
+      let routeName = window.location.pathname ;
       if (!sessionStorage.getItem('token')) {
 
-        if (routeName != 'Home' && routeName != 'Login') {
+        if (!routeName.match('register') && !routeName.match('login')) {
           this.$router.push('/login');
         }
 
       } else {
 
-        console.log(routeName)
-        if (routeName == 'Home' || routeName == 'Login') {
+        if (routeName.match('register') || routeName.match('login')) {
           this.$router.push('/home');
         }
 
