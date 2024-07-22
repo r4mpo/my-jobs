@@ -1453,7 +1453,7 @@
                         }
                     },
                     {
-                        "name": "qtd_page",
+                        "name": "amount_page",
                         "in": "query",
                         "description": "Number of vacancies per page.",
                         "schema": {

@@ -58,7 +58,7 @@ class VacanciesController extends Controller
      *          )
      *      ),
      *      @OA\Parameter(
-     *          name="qtd_page",
+     *          name="amount_page",
      *          in="query",
      *          description="Number of vacancies per page.",
      *          @OA\Schema(
@@ -141,7 +141,7 @@ class VacanciesController extends Controller
             $short_description = $params['short_description'] ?? '';
             $long_description = $params['long_description'] ?? '';
 
-            $qtd_page = $params['qtd_page'] ?? 10;
+            $amount_page = $params['amount_page'] ?? 10;
 
             $vacancies = DB::table('Vacancies')
                 ->join('users', 'Vacancies.user_id', '=', 'users.id')
@@ -164,7 +164,7 @@ class VacanciesController extends Controller
                 $vacancies = $vacancies->where('long_description', 'like', $long_description);
             }
 
-            $vacancies = $vacancies->orderBy('created_at', 'desc')->paginate($qtd_page);
+            $vacancies = $vacancies->orderBy('created_at', 'desc')->paginate($amount_page);
 
             $params_url = [
                 'previous' => $vacancies->previousPageUrl(),

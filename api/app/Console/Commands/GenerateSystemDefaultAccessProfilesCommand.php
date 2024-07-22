@@ -56,12 +56,17 @@ class GenerateSystemDefaultAccessProfilesCommand extends Command
             }
         }
 
-
         $administrator = Role::create(['name' => 'administrator', 'guard_name' => 'api']);
         $default = Role::create(['name' => 'default', 'guard_name' => 'api']);
 
-        $administrator->givePermissionTo($all_permissions);
-        $default->givePermissionTo($permissions_default);
+        foreach ($all_permissions as $permission) {
+            $administrator->givePermissionTo($permission);
+        }
+
+        foreach ($permissions_default as $permission) {
+            $default->givePermissionTo($permission);
+        }
+
 
         echo json_encode([
             'message' => 'success',
