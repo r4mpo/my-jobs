@@ -26,7 +26,8 @@
                             class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                     <div class="text-sm">
-                        <RouterLink to="/register" class="font-semibold text-indigo-600 hover:text-indigo-500">Register?</RouterLink>
+                        <RouterLink to="/register" class="font-semibold text-indigo-600 hover:text-indigo-500">Register?
+                        </RouterLink>
                     </div>
                 </div>
 
@@ -40,7 +41,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { login } from '../Operations';
 export default {
     name: 'Login',
     data() {
@@ -50,29 +51,26 @@ export default {
         }
     },
     methods: {
-        login() {
-            let btn = document.getElementById('send');
-            btn.disabled = true;
+        async login() {
+            try {
+                
+                let btn = document.getElementById('send');
+                btn.disabled = true;
 
-            axios.post(`http://127.0.0.1:8000/api/auth/login`, {
-                email: this.email, password: this.password
-            }).then(response => {
-
-                let token = response.data.access_token;
+                let token = await login(this.email, this.password);
                 sessionStorage.setItem('token', token);
                 this.$router.push('/home');
 
-            }).catch(error => {
-                if (error.response.data.message != undefined) {
-                    alert(error.response.data.message)
-                }
+            } catch (error) {
 
-                if (error.response.data.error != undefined) {
-                    alert(error.response.data.error)
+                if (error.response && error.response.data && error.response.data.message) {
+                    alert(error.response.data.message);
+                } else {
+                    alert('Error logging in. Please check your credentials and try again.');
                 }
 
                 btn.disabled = false;
-            });
+            }
         }
     }
 }

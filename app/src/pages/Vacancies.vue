@@ -68,8 +68,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import Sidenav from "../components/Sidenav.vue";
+import { getData } from "../Operations";
 
 export default {
     name: 'Vacancies',
@@ -82,7 +82,7 @@ export default {
         }
     },
     methods: {
-        getVacancies(page = 1) {
+        async getVacancies(page = 1) {
 
             let data = {
                 'wage': document.getElementById('wage').value.replace(/\D/g, ''),
@@ -115,19 +115,17 @@ export default {
                 params = params + '&short_description=' + encodeURIComponent(data.short_description);
             }
 
-            let config = {
-                "headers": {
-                    "Content-type": "application/json",
-                    "Authorization": `Bearer ${sessionStorage.getItem('token')}`,
-                }
-            };
 
-            axios.get(`http://127.0.0.1:8000/api/vacancies` + params, config)
-                .then(response => {
-                    this.vacancies = response.data.data;
-                }).catch(error => {
-                    console.error(error)
-                });
+            let url = 'vacancies' + params;
+
+            try {
+
+                let search = await getData(url);
+                this.vacancies = search;
+
+            } catch (error) {
+                alert('error when searching')
+            }
         }
     }
 }

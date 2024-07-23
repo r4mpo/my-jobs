@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { register } from '../Operations';
 export default {
     name: 'Register',
     data() {
@@ -61,28 +61,25 @@ export default {
         }
     },
     methods: {
-        register() {
-            let btn = document.getElementById('send');
-            btn.disabled = true;
+        async register() {
+            try {
+                
+                let btn = document.getElementById('send');
+                btn.disabled = true;
 
-            axios.post(`http://127.0.0.1:8000/api/auth/register`, {
-                name: this.name, email: this.email, password: this.password
-            }).then(response => {
-
-                console.log(response)
+                let create = await register(this.name, this.email, this.password);
                 this.$router.push('/login');
 
-            }).catch(error => {
-                if (error.response.data.message != undefined) {
-                    alert(error.response.data.message)
-                }
+            } catch (error) {
 
-                if (error.response.data.error != undefined) {
-                    alert(error.response.data.error)
+                if (error.response && error.response.data && error.response.data.message) {
+                    alert(error.response.data.message);
+                } else {
+                    alert('Error register. Please check your credentials and try again.');
                 }
 
                 btn.disabled = false;
-            });
+            }
         }
     }
 }
