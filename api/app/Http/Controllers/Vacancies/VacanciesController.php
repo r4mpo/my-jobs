@@ -157,11 +157,11 @@ class VacanciesController extends Controller
             }
 
             if (!empty($short_description)) {
-                $vacancies = $vacancies->where('short_description', 'like', $short_description);
+                $vacancies = $vacancies->where('short_description', 'like', '%' . $short_description . '%');
             }
 
             if (!empty($long_description)) {
-                $vacancies = $vacancies->where('long_description', 'like', $long_description);
+                $vacancies = $vacancies->where('long_description', 'like', '%' . $long_description . '%');
             }
 
             $vacancies = $vacancies->orderBy('created_at', 'desc')->paginate($amount_page);
