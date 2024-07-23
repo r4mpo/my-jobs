@@ -29,7 +29,7 @@
                 <div class="">
                     <label for="amount_page" class="block text-sm font-medium leading-6 text-gray-900">Amount
                         Page</label>
-                    <input id="amount_page" onkeyup="allowOnlyNumbers(event)" name="amount_page" type="text"
+                    <input id="amount_page" onkeyup="allowOnlyNumbers(this)" name="amount_page" type="text"
                         autocomplete="amount_page"
                         class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
@@ -82,22 +82,20 @@ export default {
         }
     },
     methods: {
-        getVacancies() {
+        getVacancies(page = 1) {
 
             let data = {
                 'wage': document.getElementById('wage').value.replace(/\D/g, ''),
                 'zip_code': document.getElementById('zip_code').value.replace(/\D/g, ''),
-                'amount_page': document.getElementById('amount_page').value.replace(/\D/g, ''),
+                'amount_page': document.getElementById('amount_page').value,
                 'long_description': document.getElementById('long_description').value,
                 'short_description': document.getElementById('short_description').value
             }
 
-            let params = '';
+            let params = '?page=' + page;
 
             if (data.amount_page != '') {
-                params = params + '?amount_page=' + encodeURIComponent(data.amount_page);
-            } else {
-                params = params + '?amount_page=' + 5;
+                params = params + '&amount_page=' + encodeURIComponent(data.amount_page);
             }
 
             if (data.wage != '') {

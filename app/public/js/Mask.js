@@ -49,7 +49,7 @@ function formatCurrency(input) {
 }
 
 // Function to allow only numbers in a field
-function allowOnlyNumbers(event) {
+function allowOnlyNumbers(input) {
     // Ensure that only digits are allowed
-    event.target.value = event.target.value.replace(/\D/g, '');
+    input.value = input.value.replace(/\D/g, '');
 }
