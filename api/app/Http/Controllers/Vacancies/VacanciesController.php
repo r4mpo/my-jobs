@@ -177,7 +177,7 @@ class VacanciesController extends Controller
                     'short_description' => $vacancy->short_description,
                     'long_description' => $vacancy->long_description,
                     'wage' => $this->format("money", $vacancy->wage),
-                    'zip_code' => $vacancy->zip_code,
+                    'zip_code' => $this->format("zip_code", $vacancy->zip_code),
                     'user' => $vacancy->user,
                 ];
             });
