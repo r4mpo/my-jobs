@@ -116,14 +116,14 @@ class VacanciesController extends Controller
      *                  property="pages",
      *                  type="object",
      *                  @OA\Property(
-     *                      property="previous",
+     *                      property="amount",
      *                      type="string",
-     *                      description="Link to the previous page."
+     *                      description="Amount pages."
      *                  ),
      *                  @OA\Property(
-     *                      property="next",
+     *                      property="current",
      *                      type="string",
-     *                      description="Link to the next page."
+     *                      description="Current page number."
      *                  )
      *              )
      *          )
@@ -167,8 +167,8 @@ class VacanciesController extends Controller
             $vacancies = $vacancies->orderBy('created_at', 'desc')->paginate($amount_page);
 
             $params_url = [
-                'previous' => $vacancies->previousPageUrl(),
-                'next' => $vacancies->nextPageUrl(),
+                'current' => $vacancies->currentPage(),
+                'amount' => $vacancies->lastPage()
             ];
 
             $vacancies = $vacancies->map(function ($vacancy) {

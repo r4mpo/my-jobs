@@ -63,8 +63,30 @@
                     </a>
                 </div>
             </div>
+            <div class="flex mt-2">
+                <!-- Previous Button -->
+                <a href="#" v-if="this.pages.previous != 0" v-on:click="getVacancies(this.pages.previous)"
+                    class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 5H1m0 0 4 4M1 5l4-4" />
+                    </svg>
+                    Previous
+                </a>
+                <a href="#" v-if="this.pages.next != 0" v-on:click="getVacancies(this.pages.next)"
+                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    Next
+                    <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -79,6 +101,11 @@ export default {
     data() {
         return {
             vacancies: [],
+            pages: {
+                previous: 0,
+                next: 0,
+                total: 0,
+            }
         }
     },
     methods: {
@@ -121,7 +148,16 @@ export default {
             try {
 
                 let search = await getData(url);
-                this.vacancies = search;
+                this.vacancies = search.data;
+
+                this.pages.total = search.pages.amount;
+                this.pages.previous = search.pages.current - 1;
+
+                if (search.pages.current == search.pages.amount) {
+                    this.pages.next = 0;
+                } else {
+                    this.pages.next = search.pages.current + 1;
+                }
 
             } catch (error) {
                 alert('error when searching')

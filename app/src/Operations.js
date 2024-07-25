@@ -37,7 +37,7 @@ export function register(name, email, password) {
 export function getData(path) {
   return axios.get(URL_BASE + path, getConfig())
     .then(response => {
-      return response.data.data;
+      return response.data;
     }).catch(error => {
       return error;
     });
