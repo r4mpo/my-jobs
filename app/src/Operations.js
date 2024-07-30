@@ -42,3 +42,12 @@ export function getData(path) {
       return error;
     });
 }
+
+export function postData(path, body) {
+  return axios.post(URL_BASE + path, body, getConfig())
+  .then(response => {
+    return response.data;
+  }).catch(error => {
+    return error;
+  });
+}

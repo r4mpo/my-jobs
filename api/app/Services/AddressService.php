@@ -22,7 +22,7 @@ class AddressService implements ApiDataInterface
 
     public function register($data): object
     {
-        $zip_code = preg_replace('/\D/', '', $data['cep']);
+        $zip_code = preg_replace('/\D/', '', $data['cep']); // formatter return viacep
 
         if ($address = AddressVacancy::where('zip_code', $zip_code)->first()) {
             return $address;

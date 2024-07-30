@@ -694,14 +694,16 @@ class VacanciesController extends Controller
         $address = new Address;
         $data_address = $address->get("viacep.com.br/ws/" . $zip_code . "/json/");
 
-        if (!isset($data['erro'])) {
+        if (!empty($data_address)) {
             $address = $address->register($data_address);
+        } else {
+            throw new \Exception('invalid address');
         }
 
         try {
             return $address->toArray();
         } catch (\Exception $exception) {
-            return ['error' => true];
+            return ['error' => true, 'message' => $exception->getMessage(), 'code' => $exception->getCode(), 'line' => $exception->getLine()];
         }
     }
 }
