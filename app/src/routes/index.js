@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from '../pages/Login.vue';
 import Register from '../pages/Register.vue';
 import Vacancies from '../pages/Vacancies.vue';
-import CreateVacancy from '../pages/CreateVacancy.vue';
+import CreateOrUpdateVacancy from '../pages/CreateOrUpdateVacancy.vue';
 import Home from '../pages/Home.vue';
 
 const routes = [
@@ -27,9 +27,9 @@ const routes = [
         component: Vacancies
     },
     {
-        path: '/create_vacancy',
-        name: 'CreateVacancy',
-        component: CreateVacancy
+        path: '/create_or_update_vacancy/:vacancy?',
+        name: 'CreateOrUpdateVacancy',
+        component: CreateOrUpdateVacancy
     }
 ];
 

@@ -51,3 +51,12 @@ export function postData(path, body) {
     return error;
   });
 }
+
+export function putData(path, body) {
+  return axios.put(URL_BASE + path, body, getConfig())
+  .then(response => {
+    return response.data;
+  }).catch(error => {
+    return error;
+  });
+}

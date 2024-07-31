@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="flex mt-2">
-                <RouterLink to="/create_vacancy" title="New vacancy"
+                <RouterLink to="/create_or_update_vacancy" title="New vacancy"
                     class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
