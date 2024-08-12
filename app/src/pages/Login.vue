@@ -58,7 +58,8 @@ export default {
                 btn.disabled = true;
 
                 let token = await login(this.email, this.password);
-                sessionStorage.setItem('token', token);
+                sessionStorage.setItem('token', token.access_token);
+                sessionStorage.setItem('user_id', token.user_id);
                 this.$router.push('/home');
 
             } catch (error) {

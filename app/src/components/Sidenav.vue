@@ -65,6 +65,7 @@ export default {
   methods: {
     signIn() {
       sessionStorage.removeItem('token');
+      sessionStorage.removeItem('user_id');
       this.$router.push('/login');
     }
   }

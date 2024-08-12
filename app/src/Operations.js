@@ -16,7 +16,7 @@ export function login(email, password) {
     email: email,
     password: password
   }).then(response => {
-    return response.data.access_token;
+    return response.data;
   }).catch(error => {
     throw error;
   });

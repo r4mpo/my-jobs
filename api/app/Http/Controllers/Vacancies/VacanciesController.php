@@ -105,6 +105,12 @@ class VacanciesController extends Controller
      *                          example="14148-300"
      *                      ),
      *                      @OA\Property(
+     *                          property="user_id",
+     *                          type="integer",
+     *                          description="ID of the user registered of vacancy.",
+     *                          example="5"
+     *                      ),
+     *                      @OA\Property(
      *                          property="user",
      *                          type="string",
      *                          description="User registered of vacancy",
@@ -179,6 +185,7 @@ class VacanciesController extends Controller
                     'wage' => $this->format("money", $vacancy->wage),
                     'zip_code' => $this->format("zip_code", $vacancy->zip_code),
                     'user' => $vacancy->user,
+                    'user_id' => $vacancy->user_id,
                 ];
             });
 
