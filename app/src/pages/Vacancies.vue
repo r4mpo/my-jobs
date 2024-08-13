@@ -63,7 +63,7 @@
                             </svg>
                         </RouterLink>
 
-                        <a href="#"
+                        <a href="#" v-on:click="deleteVacancies(vacancy.id)"
                             class="inline-flex ml-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
@@ -115,7 +115,7 @@
 <script>
 import { RouterLink } from "vue-router";
 import Sidenav from "../components/Sidenav.vue";
-import { getData } from "../Operations";
+import { getData, deleteData } from "../Operations";
 
 export default {
     name: 'Vacancies',
@@ -185,8 +185,55 @@ export default {
                 }
 
             } catch (error) {
-                alert('error when searching');
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'error when searching',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
             }
+        },
+
+        async deleteVacancies(vacancy_id) {
+
+            Swal.fire({
+                title: "Do you really want to delete this job permanently?",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                icon: "warning",
+            }).then((result) => {
+                if (result.isConfirmed) 
+                {
+                    let url = 'vacancies/' + vacancy_id;
+
+                    try{
+
+                        let destroy = deleteData(url);
+
+                        console.log(destroy);
+
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'vacancy deleted',
+                            icon: 'success',
+                            confirmButtonText: 'Ok'
+                        });
+
+                        this.getVacancies();
+
+                    } catch (error) {
+
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'error when deleting vacancy',
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                        });
+
+                        console.error(error);
+                    }
+                }
+            });
         }
     }
 }

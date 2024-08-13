@@ -60,3 +60,12 @@ export function putData(path, body) {
     return error;
   });
 }
+
+export function deleteData(path) {
+  return axios.delete(URL_BASE + path, getConfig())
+  .then(response => {
+    return response.data;
+  }).catch(error => {
+    return error;
+  });
+}
