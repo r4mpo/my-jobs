@@ -1,5 +1,8 @@
-# Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+** Procedimento instalação do sistema:**
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+- `<command>` git clone `<repositorio>` // clona repositório do projeto
+- `<command>` npm install // instala todas dependências
+- `<command>` npm update // atualiza todas dependências
+- `<command>` npm run build // constrói toda as estruturas do sistema
+- `<command>` npm run dev // roda um ambiente de desenvolvimento local
