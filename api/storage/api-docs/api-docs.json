@@ -1498,6 +1498,11 @@
                                                         "type": "string",
                                                         "example": "14148-300"
                                                     },
+                                                    "user_id": {
+                                                        "description": "ID of the user registered of vacancy.",
+                                                        "type": "integer",
+                                                        "example": "5"
+                                                    },
                                                     "user": {
                                                         "description": "User registered of vacancy",
                                                         "type": "string",
@@ -1509,12 +1514,12 @@
                                         },
                                         "pages": {
                                             "properties": {
-                                                "previous": {
-                                                    "description": "Link to the previous page.",
+                                                "amount": {
+                                                    "description": "Amount pages.",
                                                     "type": "string"
                                                 },
-                                                "next": {
-                                                    "description": "Link to the next page.",
+                                                "current": {
+                                                    "description": "Current page number.",
                                                     "type": "string"
                                                 }
                                             },
@@ -1991,38 +1996,6 @@
             "description": "Profiles"
         },
         {
-            "name": "Profiles",
-            "description": "Profiles"
-        },
-        {
-            "name": "Profiles",
-            "description": "Profiles"
-        },
-        {
-            "name": "Profiles",
-            "description": "Profiles"
-        },
-        {
-            "name": "Profiles",
-            "description": "Profiles"
-        },
-        {
-            "name": "Auth",
-            "description": "Auth"
-        },
-        {
-            "name": "Users",
-            "description": "Users"
-        },
-        {
-            "name": "Auth",
-            "description": "Auth"
-        },
-        {
-            "name": "Auth",
-            "description": "Auth"
-        },
-        {
             "name": "Auth",
             "description": "Auth"
         },
@@ -2035,40 +2008,8 @@
             "description": "Infos"
         },
         {
-            "name": "Infos",
-            "description": "Infos"
-        },
-        {
             "name": "VacanciesUsers",
             "description": "VacanciesUsers"
-        },
-        {
-            "name": "VacanciesUsers",
-            "description": "VacanciesUsers"
-        },
-        {
-            "name": "VacanciesUsers",
-            "description": "VacanciesUsers"
-        },
-        {
-            "name": "VacanciesUsers",
-            "description": "VacanciesUsers"
-        },
-        {
-            "name": "Vacancies",
-            "description": "Vacancies"
-        },
-        {
-            "name": "Vacancies",
-            "description": "Vacancies"
-        },
-        {
-            "name": "Vacancies",
-            "description": "Vacancies"
-        },
-        {
-            "name": "Vacancies",
-            "description": "Vacancies"
         },
         {
             "name": "Vacancies",
