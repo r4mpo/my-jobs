@@ -41,18 +41,22 @@ class Vacancy extends ModelDefault
     {
         $zip = AddressVacancy::where('zip_code', $this->zip_code)->orderBy('created_at', 'DESC')->first();
 
-        $data = [
-            'zip_code' => $this->__formatDatas('zip_code', $zip->zip_code),
-            'street' => $zip->street,
-            'complement' => $zip->complement,
-            'neighborhood' => $zip->neighborhood,
-            'locality' => $zip->locality,
-            'uf' => $zip->uf,
-            'ibge' => $zip->ibge,
-            'gia' => $zip->gia,
-            'ddd' => $zip->ddd,
-            'siafi' => $zip->siafi
-        ];
+        if (empty($zip)) {
+            $data = ['zip_code' => $this->__formatDatas('zip_code', $this->zip_code)];
+        } else {
+            $data = [
+                'zip_code' => $this->__formatDatas('zip_code', $zip->zip_code),
+                'street' => $zip->street,
+                'complement' => $zip->complement,
+                'neighborhood' => $zip->neighborhood,
+                'locality' => $zip->locality,
+                'uf' => $zip->uf,
+                'ibge' => $zip->ibge,
+                'gia' => $zip->gia,
+                'ddd' => $zip->ddd,
+                'siafi' => $zip->siafi
+            ];
+        }
 
         return (object) $data;
     }

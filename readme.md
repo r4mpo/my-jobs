@@ -415,7 +415,6 @@ Atualmente o projeto está em desenvolvimento. A API está em estágio avançado
 }
 ```
 
-
 ### 3. Excluir Informação
 
 **Endpoint:** `DELETE /api/infos/{id}`
@@ -436,7 +435,6 @@ Atualmente o projeto está em desenvolvimento. A API está em estágio avançado
 - Erros genéricos, como problemas internos do servidor, retornam mensagens de erro e códigos apropriados para facilitar o diagnóstico.
 
 ---
-
 
 Claro! Aqui está a documentação completa para todos os endpoints da API "Vacancies":
 
@@ -912,3 +910,30 @@ Authorization: Bearer <your_access_token>
 ```
 
 ---
+
+# App
+
+A aplicação Vue.JS que compõe o front-end começou a ser desenvolvida recentemente, portanto está consumindo apenas alguns endpoints da API.
+
+### 1. Registro e Login
+
+<p >
+    <img width="400" height="300" src="public/registro-e-login.gif">
+</p>
+
+### 2. Busca e Edição de Vagas
+
+<p >
+    <img width="400" height="300" src="public/busca-e-edicao-vagas.gif">
+</p>
+
+### 3. Cadastro e Exclusão de Vagas
+
+
+<p >
+    <img width="400" height="300" src="public/cadastro-e-exclusao-de-vagas.gif">
+</p>
+
+---
+
+**Especialmente no app front-end ainda existem muitas alterações a serem feitas, como validações e implementações, notificações e etc, mas julgo que está apto a ser compartilhado por aqui, hahaha! Graças a esse projeto, tenho conseguido estudar melhor o desenvolvimento web full stack com tecnologias modernas e um padrão de microsserviços bem estruturado.**
